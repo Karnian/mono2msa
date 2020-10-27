@@ -1,6 +1,7 @@
 package com.example.template.config;
 
-import com.example.template.Delivery;
+import com.example.template.book.Book;
+import com.example.template.delivery.Delivery;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,6 @@ public class ExposeEntityIdRestMvcConfiguration implements RepositoryRestConfigu
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-        config.exposeIdsFor(Delivery.class);
+        config.exposeIdsFor(Book.class);
     }
 }

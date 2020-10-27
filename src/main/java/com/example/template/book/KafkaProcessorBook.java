@@ -9,11 +9,8 @@ public interface KafkaProcessorBook {
     String bookSaved_INPUT = "bookSaved-in";
     String bookSaved_OUTPUT = "bookSaved-out";
 
-    String customerSaved_INPUT = "customerSaved-in";
-    String customerSaved_OUTPUT = "customerSaved-out";
-
-    String rentalSaved_INPUT = "rentalSaved-in";
-    String rentalSaved_OUTPUT = "rentalSaved-out";
+    String rentSaved_INPUT = "rentSaved-in";
+    String rentSaved_OUTPUT = "rentSaved-out";
 
     String deliverySaved_INPUT = "deliverySaved-in";
     String deliverySaved_OUTPUT = "deliverySaved-out";
@@ -24,17 +21,11 @@ public interface KafkaProcessorBook {
     @Output(bookSaved_OUTPUT)
     MessageChannel outboundBookSaved();
 
-    @Input(customerSaved_INPUT)
-    SubscribableChannel inboundCustomerSaved();
+    @Input(rentSaved_INPUT)
+    SubscribableChannel inboundRentSaved();
 
-    @Output(customerSaved_OUTPUT)
-    MessageChannel outboundCustomerSaved();
-
-    @Input(rentalSaved_INPUT)
-    SubscribableChannel inboundRentalSaved();
-
-    @Output(rentalSaved_OUTPUT)
-    MessageChannel outboundRentalSaved();
+    @Output(rentSaved_OUTPUT)
+    MessageChannel outboundRentSaved();
 
     @Input(deliverySaved_INPUT)
     SubscribableChannel inboundDeliverySaved();

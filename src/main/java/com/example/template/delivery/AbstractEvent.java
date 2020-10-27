@@ -1,10 +1,9 @@
-package com.example.template.rental;
+package com.example.template.delivery;
 
 import com.example.template.Application;
-import com.example.template.book.KafkaProcessorBook;
+import com.example.template.rental.KafkaProcessorRental;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;

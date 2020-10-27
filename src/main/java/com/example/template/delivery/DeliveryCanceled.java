@@ -1,11 +1,20 @@
 
-package delivery.delivery;
+package com.example.template.delivery;
 
-import delivery.AbstractEvent;
 
-public class BookDelvCanceled extends AbstractEvent {
+public class DeliveryCanceled extends AbstractEvent {
 
     private Long id;
+
+    public Long getRentId() {
+        return rentId;
+    }
+
+    public void setRentId(Long rentId) {
+        this.rentId = rentId;
+    }
+
+    private Long rentId;
 
     public Long getId() {
         return id;

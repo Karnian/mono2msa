@@ -1,11 +1,11 @@
-package com.example.template.book;
+package com.example.template.delivery;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 
-public interface KafkaProcessorBook {
+public interface KafkaProcessorDelivery {
     String bookSaved_INPUT = "bookSaved-in";
     String bookSaved_OUTPUT = "bookSaved-out";
 

@@ -1,37 +1,43 @@
-package com.example.template.product;
+package com.example.template.rental;
 
 import com.example.template.Application;
+import com.example.template.book.BookService;
+import com.example.template.delivery.Delivery;
+import com.example.template.delivery.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class ProductController {
+public class RentalController {
 
     @Autowired
-    ProductService productService;
+    RentalService rentalService;
 
-    @GetMapping("/product/{productId}")
-    Product productStockCheck(@PathVariable(value = "productId") Long productId) {
-        return  this.productService.getProductById(productId);
+    @Autowired
+    DeliveryService deliveryService;
+
+    @GetMapping("/rental/{rentalId}")
+    Rental selectRental(@PathVariable(value = "rentalId") Long rentalId) {
+        return  this.rentalService.getRentalById(rentalId);
     }
 
-    @PostMapping("/product")
-    Product productInsert(@RequestBody String data) {
-        System.out.println(data);
-        return this.productService.save(data);
+    @PostMapping("/rental")
+    Rental insertRental(@RequestBody String data) {
+
+        return this.rentalService.save(data);
     }
 
-    @Value("${superuser.userId}")
+    /*@Value("${superuser.userId}")
     String superUserId;
 
     @Autowired
-    Environment env;
+    Environment env;*/
     /**
      * env 혹은 설정 값을 가져오는 테스트 코드
      */
-    @GetMapping("/env")
+    /*@GetMapping("/env")
     String getEnvSample() {
 
         // 1. applicationContext 에서 가져오기
@@ -45,5 +51,5 @@ public class ProductController {
         System.out.println(" @Value = " + superUserId);
 
         return superUserId;
-    }
+    }*/
 }

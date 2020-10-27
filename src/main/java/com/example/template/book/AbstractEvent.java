@@ -1,4 +1,4 @@
-package com.example.template.delivery;
+package com.example.template.book;
 
 import com.example.template.Application;
 import com.example.template.rental.KafkaProcessorRental;

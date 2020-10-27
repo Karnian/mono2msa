@@ -1,16 +1,52 @@
-package delivery.rental;
+package com.example.template.rental;
 
-import delivery.AbstractEvent;
+import com.example.template.Application;
+import com.example.template.delivery.Delivery;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.util.MimeTypeUtils;
 
-public class BookRentSaved extends AbstractEvent {
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class RentSaved extends AbstractEvent {
 
     @Override
     public String getEventType() {
         return eventType;
     }
     private Long id;
-    private long bookId;
+    private Long bookId;
     private String bookName;
+    private int qty;
+    private int price;
+    private String customerId;
+    private Delivery delivery;
+
+    public Delivery getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
+    }
 
     public String getBookName() {
         return bookName;
@@ -20,21 +56,27 @@ public class BookRentSaved extends AbstractEvent {
         this.bookName = bookName;
     }
 
-    private Long qty;
-
-    public Long getQty() {
+    public int getQty() {
         return qty;
     }
 
-    public void setQty(Long qty) {
-        this.qty = qty;
+    public void setQty(int quantity) {
+        this.qty = quantity;
     }
 
-    public long getCustomerId() {
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(long customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
@@ -46,27 +88,6 @@ public class BookRentSaved extends AbstractEvent {
         this.customerName = customerName;
     }
 
-    private long customerId;
     private String customerName;
 
-
-    public long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(long bookId) {
-        this.bookId = bookId;
-    }
-
-    public BookRentSaved(){
-        super();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

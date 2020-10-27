@@ -1,11 +1,10 @@
-package com.example.template.product;
+package com.example.template.book;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,25 +13,24 @@ public class BookServiceImpl implements BookService {
     @Autowired
     BookRepository BookRepository;
 
-    public void decreaseStock(Long productId, int quantity) {
+    public void decreaseStock(Long bookId, int quantity) {
 
         /**
          * 주문이 발생시, 수량을 줄인다.
          */
-        Optional<Product> productOptional = BookRepository.findById(productId);
-        Product product = productOptional.get();
-        product.setStock(product.getStock() - quantity);
-
-        BookRepository.save(product);
-
+        Optional<Book> productOptional = BookRepository.findById(bookId);
+        Book book = productOptional.get();
+        book.setStock(book.getStock() - quantity);
+        System.out.println("bookId="+bookId+" , stock="+book.getStock()+" , quantity="+quantity);
+        BookRepository.save(book);
     }
 
-    public void increaseStock(Long productId, int quantity) {
+    public void increaseStock(Long bookId, int quantity) {
         /**
          * 주문 취소시, 수량을 늘인다
          */
-        Optional<Product> productOptional = BookRepository.findById(productId);
-        Product product = productOptional.get();
+        Optional<Book> productOptional = BookRepository.findById(bookId);
+        Book product = productOptional.get();
         product.setStock(product.getStock() + quantity);
 
         BookRepository.save(product);
@@ -41,23 +39,23 @@ public class BookServiceImpl implements BookService {
     /**
      * 상품 조회
      */
-    public Product getProductById(Long id){
+    public Book getBookById(Long id){
 
-        Optional<Product> productOptional = BookRepository.findById(id);
-        Product product = productOptional.get();
-
-        return product;
+        Optional<Book> productOptional = BookRepository.findById(id);
+        Book book = productOptional.get();
+        System.out.println(book.getId()+":"+book.getStock());
+        return book;
     }
 
-    public Product save(String data){
+    public Book save(String data){
         ObjectMapper mapper = new ObjectMapper();
-        Product product = null;
+        Book book = null;
         try {
-            product = mapper.readValue(data, Product.class);
+            book = mapper.readValue(data, Book.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return BookRepository.save(product);
+        return BookRepository.save(book);
     }
 }

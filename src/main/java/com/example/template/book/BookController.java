@@ -1,4 +1,4 @@
-package com.example.template.product;
+package com.example.template.book;
 
 import com.example.template.Application;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,27 +10,36 @@ import org.springframework.web.bind.annotation.*;
 public class BookController {
 
     @Autowired
-    ProductService productService;
+    BookService bookService;
 
-    @GetMapping("/product/{productId}")
-    Product productStockCheck(@PathVariable(value = "productId") Long productId) {
-        return  this.productService.getProductById(productId);
+    @GetMapping("/book/{bookId}")
+    Book productStockCheck(@PathVariable(value = "bookId") Long bookId) {
+        return  this.bookService.getBookById(bookId);
     }
 
-    @PostMapping("/product")
-    Product productInsert(@RequestBody String data) {
-        System.out.println(data);
-        return this.productService.save(data);
+    @PostMapping("/book")
+    Book bookInsert(@RequestBody String data) {
+        return this.bookService.save(data);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, path="/book/{book}", consumes = "application/json")
+    Book bookModify(@PathVariable(value = "book") String book) {
+        return this.bookService.save(book);
+    }
+
+    @RequestMapping(method = RequestMethod.PATCH, value = "/book/decreaseStock", consumes = "application/json")
+    Book updateBookStock(@RequestBody String data) {
+        return this.bookService.save(data);
     }
 
     @Value("${superuser.userId}")
     String superUserId;
 
-    @Autowired
+    /*@Autowired
     Environment env;
-    /**
+    *//**
      * env 혹은 설정 값을 가져오는 테스트 코드
-     */
+     *//*
     @GetMapping("/env")
     String getEnvSample() {
 
@@ -45,5 +54,5 @@ public class BookController {
         System.out.println(" @Value = " + superUserId);
 
         return superUserId;
-    }
+    }*/
 }

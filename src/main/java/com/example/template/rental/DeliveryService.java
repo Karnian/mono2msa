@@ -1,5 +1,6 @@
-package com.example.template.delivery;
+package com.example.template.rental;
 
+import com.example.template.delivery.Delivery;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

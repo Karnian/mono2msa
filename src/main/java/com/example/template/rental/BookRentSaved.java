@@ -1,6 +1,4 @@
-package delivery.rental;
-
-import delivery.AbstractEvent;
+package com.example.template.rental;
 
 public class BookRentSaved extends AbstractEvent {
 
@@ -20,13 +18,13 @@ public class BookRentSaved extends AbstractEvent {
         this.bookName = bookName;
     }
 
-    private Long qty;
+    private int qty;
 
-    public Long getQty() {
+    public int getQty() {
         return qty;
     }
 
-    public void setQty(Long qty) {
+    public void setQty(int qty) {
         this.qty = qty;
     }
 

@@ -6,39 +6,39 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 
 public interface KafkaProcessorRental {
-    String bookSaved_INPUT = "bookSaved-in";
+    /*String bookSaved_INPUT = "bookSaved-in";
     String bookSaved_OUTPUT = "bookSaved-out";
+*/
+    String rentSaved_INPUT = "rentSaved-in";
+    String rentSaved_OUTPUT = "rentSaved-out";
 
-    String customerSaved_INPUT = "customerSaved-in";
-    String customerSaved_OUTPUT = "customerSaved-out";
+    String deliveryCreated_INPUT = "deliveryCreated-in";
+    String deliveryCreated_OUTPUT = "deliveryCreated-out";
 
-    String rentalSaved_INPUT = "rentalSaved-in";
-    String rentalSaved_OUTPUT = "rentalSaved-out";
+    /*String deliveryCanceled_INPUT = "deliveryCanceled-in";
+    String deliveryCanceled_OUTPUT = "deliveryCanceled-out";*/
 
-    String deliverySaved_INPUT = "deliverySaved-in";
-    String deliverySaved_OUTPUT = "deliverySaved-out";
-
-    @Input(bookSaved_INPUT)
+    /*@Input(bookSaved_INPUT)
     SubscribableChannel inboundBookSaved();
 
     @Output(bookSaved_OUTPUT)
-    MessageChannel outboundBookSaved();
+    MessageChannel outboundBookSaved();*/
 
-    @Input(customerSaved_INPUT)
-    SubscribableChannel inboundCustomerSaved();
+    @Input(rentSaved_INPUT)
+    SubscribableChannel inboundRentSaved();
 
-    @Output(customerSaved_OUTPUT)
-    MessageChannel outboundCustomerSaved();
+    @Output(rentSaved_OUTPUT)
+    MessageChannel outboundRentSaved();
 
-    @Input(rentalSaved_INPUT)
-    SubscribableChannel inboundRentalSaved();
+    @Input(deliveryCreated_INPUT)
+    SubscribableChannel inboundDeliveryCreated();
 
-    @Output(rentalSaved_OUTPUT)
-    MessageChannel outboundRentalSaved();
+    @Output(deliveryCreated_OUTPUT)
+    MessageChannel outboundDeliveryCreated();
 
-    @Input(deliverySaved_INPUT)
-    SubscribableChannel inboundDeliverySaved();
+    /*@Input(deliveryCanceled_INPUT)
+    SubscribableChannel inboundDeliveryCanceled();
 
-    @Output(deliverySaved_OUTPUT)
-    MessageChannel outboundDeliverySaved();
+    @Output(deliveryCanceled_OUTPUT)
+    MessageChannel outboundDeliveryCanceled();*/
 }

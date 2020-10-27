@@ -1,4 +1,4 @@
-package com.example.template.book;
+package com.example.template.delivery;
 
 import com.example.template.Application;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,30 +7,35 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class BookController {
+public class DeliveryController {
 
     @Autowired
-    BookService bookService;
+    DeliveryService deliveryService;
 
-    @GetMapping("/book/{bookId}")
-    Book productStockCheck(@PathVariable(value = "bookId") Long bookId) {
-        return  this.bookService.getBookById(bookId);
+    @GetMapping("/delivery/{deliveryId}")
+    Delivery selectDelivery(@PathVariable(value = "deliveryId") Long deliveryId) {
+        return  this.deliveryService.getDeliveryById(deliveryId);
     }
 
-    @PostMapping("/product")
-    Book productInsert(@RequestBody String data) {
-        System.out.println(data);
-        return this.bookService.save(data);
+    @PostMapping("/cancel/{deliveryId}")
+    Delivery canceledDelivery(@PathVariable(value = "deliveryId") Long deliveryId) {
+        Delivery delivery = deliveryService.getDeliveryById(deliveryId);
+
+
+        return  this.deliveryService.getDeliveryById(deliveryId);
     }
 
-    @Value("${superuser.userId}")
-    String superUserId;
+    @PostMapping("/delivery")
+    Delivery insertDelivery(@RequestBody String data) {
+
+        return this.deliveryService.save(data);
+    }
+
+    //@Value("${superuser.userId}")
+    //String superUserId;
 
     @Autowired
     Environment env;
-    /**
-     * env 혹은 설정 값을 가져오는 테스트 코드
-     */
     @GetMapping("/env")
     String getEnvSample() {
 
@@ -42,8 +47,8 @@ public class BookController {
         System.out.println(" Autowired Environment = " + env.getProperty("superuser.userId"));
 
         // 3. @Value
-        System.out.println(" @Value = " + superUserId);
+        //System.out.println(" @Value = " + superUserId);
 
-        return superUserId;
+        return env.getProperty("superuser.userId");
     }
 }
