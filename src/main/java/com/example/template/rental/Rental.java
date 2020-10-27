@@ -79,6 +79,7 @@ public class Rental {
         RestTemplate restTemplate = Application.applicationContext.getBean(RestTemplate.class);
         Environment env = Application.applicationContext.getEnvironment();
         String bookUrl = env.getProperty("api.url.book") + "/book/" + bookId;
+        System.out.println(bookUrl);
 
         // 상품 서비스의 재고량 조회
         ResponseEntity<Book> bookEntity = restTemplate.getForEntity(bookUrl, Book.class);
