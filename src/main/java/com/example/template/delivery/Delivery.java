@@ -4,29 +4,59 @@ package com.example.template.delivery;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "delivery_table")
 public class Delivery {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long deliveryId;
-    private int quantity;
-    private Long productId;
-    private String productName;
+    private Long id;
+    private Long rentId;
     private String customerId;
     private String customerName;
-    private String deliveryAddress;
     private String deliveryState;
+    private int qty;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getRentId() {
+        return rentId;
+    }
+
+    public void setRentId(Long rentId) {
+        this.rentId = rentId;
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @PrimaryKeyJoinColumn(name = "order_id", referencedColumnName = "deliveryId")
 //    private Order order;
-    private Long orderId;
 
-//    @PostPersist
-//    private void callProductApi() {
-//        // 상품 수량 변경 - 수량변경은 상품서비스에서 직접..
-//        ProductService productService = Application.applicationContext.getBean(ProductService.class);
-//        productService.decreaseStock(productId, quantity);
-//    }
+
+    @PostPersist
+    private void PostPersionst() throws Exception {
+        System.out.println("Delivery.PostPersionst() start");
+
+        // 상품 수량 변경 - 수량변경은 상품서비스에서 직접..
+        DeliveryCreated create = new DeliveryCreated();
+        create.setId(this.getId());
+        create.setRentId(this.getRentId());
+
+        System.out.println("DeliveryCreated.publish() start");
+        create.publish();        //  비동기식
+        System.out.println("DeliveryCreated.publish() end");
+
+    }
 
 //    @PostUpdate
 //    private void deliveryUpdate(){
@@ -36,38 +66,6 @@ public class Delivery {
 //            productService.increaseStock(productId, quantity);
 //        }
 //    }
-
-    public Long getDeliveryId() {
-        return deliveryId;
-    }
-
-    public void setDeliveryId(Long deliveryId) {
-        this.deliveryId = deliveryId;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
 
     public String getCustomerId() {
         return customerId;
@@ -85,14 +83,6 @@ public class Delivery {
         this.customerName = customerName;
     }
 
-    public String getDeliveryAddress() {
-        return deliveryAddress;
-    }
-
-    public void setDeliveryAddress(String deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
-    }
-
     public String getDeliveryState() {
         return deliveryState;
     }
@@ -101,19 +91,4 @@ public class Delivery {
         this.deliveryState = deliveryState;
     }
 
-//    public Order getOrder() {
-//        return order;
-//    }
-//
-//    public void setOrder(Order order) {
-//        this.order = order;
-//    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
 }
