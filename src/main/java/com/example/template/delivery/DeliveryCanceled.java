@@ -1,4 +1,8 @@
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> main
 package com.example.template.delivery;
 
 
@@ -16,6 +20,19 @@ public class DeliveryCanceled extends AbstractEvent {
 
     private Long rentId;
 
+<<<<<<< HEAD
+=======
+=======
+package delivery.delivery;
+
+import delivery.AbstractEvent;
+
+public class BookDelvCanceled extends AbstractEvent {
+
+    private Long id;
+
+>>>>>>> main
+>>>>>>> main
     public Long getId() {
         return id;
     }

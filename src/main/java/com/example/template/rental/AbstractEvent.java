@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> main
 package com.example.template.rental;
 
 import com.example.template.Application;
@@ -5,10 +9,26 @@ import com.example.template.book.KafkaProcessorBook;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
+=======
+=======
+package delivery;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+>>>>>>> main
+>>>>>>> main
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.util.MimeTypeUtils;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+import delivery.config.kafka.KafkaProcessor;
+>>>>>>> main
+>>>>>>> main
 
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -41,13 +61,28 @@ public abstract class AbstractEvent {
                 .build());
     }
 
+<<<<<<< HEAD
     public String toJson() throws Exception{
+=======
+<<<<<<< HEAD
+    public String toJson() throws Exception{
+=======
+    private String toJson() throws Exception{
+>>>>>>> main
+>>>>>>> main
         ObjectMapper om = new ObjectMapper();
         String json = null;
 
         try{
             json = om.writeValueAsString(this);
+<<<<<<< HEAD
             System.out.println(json);
+=======
+<<<<<<< HEAD
+            System.out.println(json);
+=======
+>>>>>>> main
+>>>>>>> main
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             throw new RuntimeException("JSON format exception", e);
@@ -61,8 +96,17 @@ public abstract class AbstractEvent {
         SimpleDateFormat defaultSimpleDateFormat = new SimpleDateFormat("YYYYMMddHHmmss");
         this.timestamp = defaultSimpleDateFormat.format(new Date());
 
+<<<<<<< HEAD
         //KafkaProcessorRental processor = (KafkaProcessorRental) Application.getBeanForProcessor();
         KafkaProcessorRental processor = Application.applicationContext.getBean(KafkaProcessorRental.class);
+=======
+<<<<<<< HEAD
+        //KafkaProcessorRental processor = (KafkaProcessorRental) Application.getBeanForProcessor();
+        KafkaProcessorRental processor = Application.applicationContext.getBean(KafkaProcessorRental.class);
+=======
+        KafkaProcessor processor = (KafkaProcessor) RentalApplication.getBeanForProcessor();
+>>>>>>> main
+>>>>>>> main
         Class cls = processor.getClass();
         Method[] methods = cls.getDeclaredMethods();
         try{

@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 package com.example.template.rental;
+=======
+package delivery.rental;
+
+import delivery.AbstractEvent;
+>>>>>>> main
 
 public class BookRentSaved extends AbstractEvent {
 
@@ -18,6 +24,7 @@ public class BookRentSaved extends AbstractEvent {
         this.bookName = bookName;
     }
 
+<<<<<<< HEAD
     private int qty;
 
     public int getQty() {
@@ -25,6 +32,15 @@ public class BookRentSaved extends AbstractEvent {
     }
 
     public void setQty(int qty) {
+=======
+    private Long qty;
+
+    public Long getQty() {
+        return qty;
+    }
+
+    public void setQty(Long qty) {
+>>>>>>> main
         this.qty = qty;
     }
 

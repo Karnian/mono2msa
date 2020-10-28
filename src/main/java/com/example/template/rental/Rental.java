@@ -4,9 +4,12 @@ import com.example.template.Application;
 import com.example.template.book.Book;
 import com.example.template.delivery.Delivery;
 import com.example.template.book.BookRepository;
+<<<<<<< HEAD
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+=======
+>>>>>>> main
 
 import javax.persistence.*;
 import java.util.Optional;
@@ -74,6 +77,7 @@ public class Rental {
      */
     @PostPersist
     private void onPostPersist() throws Exception {
+<<<<<<< HEAD
 
         // 1. 상품 서비스에 수량을 직접 변경하여 JPA call
         RestTemplate restTemplate = Application.applicationContext.getBean(RestTemplate.class);
@@ -89,12 +93,27 @@ public class Rental {
         int remainStock = stock - qty;
         book.setStock(remainStock);
         String modifyStockUrl = env.getProperty("api.url.book") + "/book/decreaseStock";
+=======
+        
+        Book book = this.getBook();
+        //  비동기식 호출
+        RentSaved bookRentSaved = new RentSaved();
+        bookRentSaved.setId(this.id);
+        bookRentSaved.setBookId(this.bookId);
+        bookRentSaved.setQty(this.qty);
+        bookRentSaved.setCustomerId(this.customerId);
+
+        System.out.println("bookRentSaved.publish() start");
+        bookRentSaved.publish();        //  비동기식
+        System.out.println("bookRentSaved.publish() end");
+>>>>>>> main
 
         Delivery delivery = new Delivery();
         delivery.setQty(this.getQty());
         delivery.setCustomerId(this.getCustomerId());
         delivery.setCustomerName(this.getCustomerName());
         delivery.setRentId(this.getId());
+<<<<<<< HEAD
 
         try{
             System.out.println("restTemplate.patchForObject() start");
@@ -122,6 +141,11 @@ public class Rental {
         }
         /*DeliveryService deliveryService = Application.applicationContext.getBean(DeliveryService.class);
 
+=======
+
+        // 배송 시작
+        /*DeliveryService deliveryService = Application.applicationContext.getBean(DeliveryService.class);
+>>>>>>> main
         try{
             System.out.println("deliveryService.startDelivery");
             deliveryService.startDelivery(delivery);    //  동기식

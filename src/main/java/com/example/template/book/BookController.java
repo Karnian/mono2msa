@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 package com.example.template.book;
+=======
+<<<<<<< HEAD
+package com.example.template.book;
+=======
+package com.example.template.product;
+>>>>>>> main
+>>>>>>> main
 
 import com.example.template.Application;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +18,10 @@ import org.springframework.web.bind.annotation.*;
 public class BookController {
 
     @Autowired
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> main
     BookService bookService;
 
     @GetMapping("/book/{bookId}")
@@ -19,6 +31,7 @@ public class BookController {
 
     @PostMapping("/book")
     Book bookInsert(@RequestBody String data) {
+<<<<<<< HEAD
         return this.bookService.save(data);
     }
 
@@ -30,16 +43,47 @@ public class BookController {
     @RequestMapping(method = RequestMethod.PATCH, value = "/book/decreaseStock", consumes = "application/json")
     Book updateBookStock(@RequestBody String data) {
         return this.bookService.save(data);
+=======
+        System.out.println(data);
+        return this.bookService.save(data);
+=======
+    ProductService productService;
+
+    @GetMapping("/product/{productId}")
+    Product productStockCheck(@PathVariable(value = "productId") Long productId) {
+        return  this.productService.getProductById(productId);
+    }
+
+    @PostMapping("/product")
+    Product productInsert(@RequestBody String data) {
+        System.out.println(data);
+        return this.productService.save(data);
+>>>>>>> main
+>>>>>>> main
     }
 
     @Value("${superuser.userId}")
     String superUserId;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> main
     /*@Autowired
     Environment env;
     *//**
      * env 혹은 설정 값을 가져오는 테스트 코드
      *//*
+<<<<<<< HEAD
+=======
+=======
+    @Autowired
+    Environment env;
+    /**
+     * env 혹은 설정 값을 가져오는 테스트 코드
+     */
+>>>>>>> main
+>>>>>>> main
     @GetMapping("/env")
     String getEnvSample() {
 
@@ -54,5 +98,13 @@ public class BookController {
         System.out.println(" @Value = " + superUserId);
 
         return superUserId;
+<<<<<<< HEAD
     }*/
+=======
+<<<<<<< HEAD
+    }*/
+=======
+    }
+>>>>>>> main
+>>>>>>> main
 }

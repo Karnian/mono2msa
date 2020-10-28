@@ -56,11 +56,14 @@ spring:
         #  destination: delivery
         #  contentType: application/json
 
+<<<<<<< HEAD
         delivery-view:
           group: delivery_view
           destination: delivery_view
           contentType: application/json
 
+=======
+>>>>>>> main
 #        dialect: org.hibernate.dialect.MySQL57Dialect
 #  datasource:
 #    url: jdbc:mysql://${_DATASOURCE_ADDRESS:35.221.110.118:3306}/${_DATASOURCE_TABLESPACE:my-database}

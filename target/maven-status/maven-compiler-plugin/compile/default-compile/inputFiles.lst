@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\Application.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\book\BookController.java
+>>>>>>> main
 C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\rental\RentalRepository.java
 C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\delivery\DeliveryServiceImpl.java
 C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\rental\DeliveryService.java
@@ -17,6 +22,7 @@ C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\book\
 C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\delivery\DeliveryRepository.java
 C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\book\KafkaProcessorBook.java
 C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\rental\RentalException.java
+<<<<<<< HEAD
 C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\rental\RentalServiceImpl.java
 C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\delivery\DeliveryService.java
 C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\rental\RentalService.java
@@ -28,5 +34,23 @@ C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\renta
 C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\book\Book.java
 C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\delivery\AbstractEvent.java
 C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\delivery\DeliveryStatus.java
+=======
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\book\PolicyHandler.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\delivery\DeliveryServiceImpl.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\rental\AbstractEvent2.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\rental\RentalServiceImpl.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\delivery\DeliveryService.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\rental\RentSaved.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\rental\RentalService.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\book\BookService.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\delivery\Delivery.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\book\BookRepository.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\rental\AbstractEvent.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\book\BookServiceImpl.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\book\Book.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\delivery\DeliveryStatus.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\rental\Rental.java
+C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\delivery\DeliveryController.java
+>>>>>>> main
 C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\rental\KafkaProcessorRental.java
 C:\workspace\mono2msa\mono2msa\monolith\src\main\java\com\example\template\rental\RentalController.java

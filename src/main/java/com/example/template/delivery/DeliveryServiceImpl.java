@@ -17,9 +17,15 @@ public class DeliveryServiceImpl implements DeliveryService{
     /**
      * 배송 시작
      */
+<<<<<<< HEAD
     public void startDelivery(String delivery){
         System.out.println("DeliveryServiceImpl.startDelivery() start");
         this.save(delivery);
+=======
+    public void startDelivery(Delivery delivery){
+        System.out.println("DeliveryServiceImpl.startDelivery() start");
+        deliveryRepository.save(delivery);
+>>>>>>> main
 
         //  비동기 호출 필요
         //  rental에 update 필요
@@ -46,11 +52,14 @@ public class DeliveryServiceImpl implements DeliveryService{
         return deliveryRepository.save(delivery);
     }
 
+<<<<<<< HEAD
     @Override
     public Delivery get(long id) {
         return this.getDeliveryById(id);
     }
 
+=======
+>>>>>>> main
     public Delivery save(Delivery data){
         System.out.println("DeliveryServiceImpl.save() start");
         return deliveryRepository.save(data);

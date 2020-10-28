@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package com.example.template.book;
+=======
+package com.example.template.delivery;
+>>>>>>> main
 
 import com.example.template.Application;
 import com.example.template.rental.KafkaProcessorRental;

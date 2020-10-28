@@ -2,19 +2,28 @@ com\example\template\delivery\Delivery.class
 com\example\template\book\KafkaProcessorBook.class
 com\example\template\delivery\DeliveryController.class
 com\example\template\delivery\DeliveryCanceled.class
+<<<<<<< HEAD
 com\example\template\rental\BookRentSaved.class
+=======
+>>>>>>> main
 com\example\template\rental\Rental.class
 com\example\template\delivery\DeliveryPolicyHandler.class
 com\example\template\delivery\DeliveryService.class
+<<<<<<< HEAD
 com\example\template\config\ExposeEntityIdRestMvcConfiguration.class
+=======
+>>>>>>> main
 com\example\template\rental\KafkaProcessorRental.class
 com\example\template\Application.class
 com\example\template\book\BookPolicyHandler.class
 com\example\template\book\BookRepository.class
 com\example\template\rental\RentalService.class
 com\example\template\book\BookController.class
+<<<<<<< HEAD
 com\example\template\delivery\KafkaProcessorDelivery.class
 com\example\template\book\AbstractEvent.class
+=======
+>>>>>>> main
 com\example\template\delivery\DeliveryServiceImpl.class
 com\example\template\rental\RentalRepository.class
 com\example\template\delivery\DeliveryCreated.class
@@ -31,4 +40,7 @@ com\example\template\rental\RentSaved.class
 com\example\template\rental\DeliveryService.class
 com\example\template\book\BookServiceImpl.class
 com\example\template\rental\RentalException.class
+<<<<<<< HEAD
 com\example\template\config\Config.class
+=======
+>>>>>>> main
