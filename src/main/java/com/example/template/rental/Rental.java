@@ -1,83 +1,134 @@
 package com.example.template.rental;
 
 import com.example.template.Application;
+import com.example.template.book.Book;
 import com.example.template.delivery.Delivery;
-import com.example.template.delivery.DeliveryService;
-import com.example.template.delivery.DeliveryStatus;
-import com.example.template.product.Product;
-import com.example.template.product.ProductRepository;
+import com.example.template.book.BookRepository;
+import org.springframework.core.env.Environment;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.*;
 import java.util.Optional;
 
 @Entity
-@Table(name = "order_table")
+@Table(name = "rental_table")
 public class Rental {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long productId;
-    private String productName;
-    private int quantity;
+    private Long bookId;
+    private String bookName;
+    private int qty;
     private int price;
     private String customerId;
     private String customerName;
-    private String customerAddr;
-    private String state = "OrderPlaced";
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    private String status;
 
     @ManyToOne
-    @JoinColumn(name = "product_idx", nullable = false, updatable = false)
-    private Product product;
+    @JoinColumn(name = "book_idx", nullable = false, updatable = false)
+    private Book book;
+
+    //private Delivery delivery;
 
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "order")
 //    @PrimaryKeyJoinColumn
 //    private Delivery delivery;
 
     @PrePersist
-    private void orderCheck(){
-        if( productId == null ){
+    private void bookCheck(){
+        if( bookId == null ){
             throw new RuntimeException();
         }
 
         int price = 0;
         String productName = null;
 
-        ProductRepository productRepository = Application.applicationContext.getBean(ProductRepository.class);
-        Optional<Product> productOptional = productRepository.findById(productId);
-        Product product = productOptional.get();
+        BookRepository bookRepository = Application.applicationContext.getBean(BookRepository.class);
+        Optional<Book> bookOptional = bookRepository.findById(bookId);
+        Book book = bookOptional.get();
 
-        price = product.getPrice();
-        productName = product.getName();
-        if( product.getStock() < getQuantity()){
-            throw new RentalException("No Available stock!");
+        price = book.getPrice();
+        productName = book.getName();
+        if( book.getStock() < getQty()){
+            throw new RentalException("재고부족");
         }
 
         this.setPrice(price);
-        this.setProductName(productName);
-        this.setProduct(product);
+        this.setBookName(productName);
+        this.setBook(book);
     }
 
     /**
      * 주문이 들어옴
      */
     @PostPersist
-    private void callDeliveryStart(){
+    private void onPostPersist() throws Exception {
+
+        // 1. 상품 서비스에 수량을 직접 변경하여 JPA call
+        RestTemplate restTemplate = Application.applicationContext.getBean(RestTemplate.class);
+        Environment env = Application.applicationContext.getEnvironment();
+        String bookUrl = env.getProperty("api.url.book") + "/book/" + bookId;
+
+        // 상품 서비스의 재고량 조회
+        ResponseEntity<Book> bookEntity = restTemplate.getForEntity(bookUrl, Book.class);
+        Book book = bookEntity.getBody();
+
+        int stock = book.getStock();
+        // 재고량 변경
+        int remainStock = stock - qty;
+        book.setStock(remainStock);
+        String modifyStockUrl = env.getProperty("api.url.book") + "/book/decreaseStock";
 
         Delivery delivery = new Delivery();
-        delivery.setQuantity(this.getQuantity());
-        delivery.setProductId(this.getProductId());
-        delivery.setProductName(this.getProductName());
-        delivery.setDeliveryAddress(this.getCustomerAddr());
+        delivery.setQty(this.getQty());
         delivery.setCustomerId(this.getCustomerId());
         delivery.setCustomerName(this.getCustomerName());
-        delivery.setDeliveryState(DeliveryStatus.DeliveryStarted.name());
-//        delivery.setOrder(this);
-        delivery.setOrderId(this.getId());
+        delivery.setRentId(this.getId());
+
+        try{
+            System.out.println("restTemplate.patchForObject() start");
+            String result = restTemplate.patchForObject(modifyStockUrl , book, String.class);
+            System.out.println("상품 수량 변경 api call " + stock + " => " + remainStock);
 
         // 배송 시작
-        DeliveryService deliveryService = Application.applicationContext.getBean(DeliveryService.class);
-        deliveryService.startDelivery(delivery);
+        // 1. 상품 서비스에 수량을 직접 변경하여 JPA call
+            System.out.println("restTemplate.patchForObject() start");
+            String createDeliveryUrl = env.getProperty("api.url.delivery") + "/delivery";
+            String resultDelv = restTemplate.postForObject(createDeliveryUrl , delivery, String.class);
+        }catch(Exception ex){
+
+            RentSaved bookRentSaved = new RentSaved();
+            bookRentSaved.setId(this.id);
+            bookRentSaved.setBookId(this.bookId);
+            bookRentSaved.setQty(this.qty);
+            bookRentSaved.setCustomerId(this.customerId);
+            bookRentSaved.setDelivery(delivery);
+
+
+            System.out.println("bookRentSaved.publish() start");
+            bookRentSaved.publish();        //  비동기식
+            System.out.println("bookRentSaved.publish() end");
+        }
+        /*DeliveryService deliveryService = Application.applicationContext.getBean(DeliveryService.class);
+
+        try{
+            System.out.println("deliveryService.startDelivery");
+            deliveryService.startDelivery(delivery);    //  동기식
+        }catch(Exception e){
+            e.printStackTrace();
+        }*/
+
     }
 
 //    @PreUpdate
@@ -102,28 +153,28 @@ public class Rental {
         this.id = id;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Long getBookId() {
+        return bookId;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getBookName() {
+        return bookName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getQty() {
+        return qty;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 
     public int getPrice() {
@@ -150,35 +201,19 @@ public class Rental {
         this.customerName = customerName;
     }
 
-    public String getCustomerAddr() {
-        return customerAddr;
+    public Book getBook() {
+        return book;
     }
 
-    public void setCustomerAddr(String customerAddr) {
-        this.customerAddr = customerAddr;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
-    public String getState() {
-        return state;
+    /*public Delivery getDelivery() {
+        return delivery;
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-//    public Delivery getDelivery() {
-//        return delivery;
-//    }
-//
-//    public void setDelivery(Delivery delivery) {
-//        this.delivery = delivery;
-//    }
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+    }*/
 }

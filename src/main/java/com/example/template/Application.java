@@ -1,12 +1,14 @@
 package com.example.template;
 
-import com.example.template.product.Product;
-import com.example.template.product.ProductOption;
-import com.example.template.product.ProductRepository;
+import com.example.template.book.Book;
+import com.example.template.book.BookRepository;
+import com.example.template.book.KafkaProcessorBook;
+import com.example.template.rental.KafkaProcessorRental;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.cors.CorsConfiguration;
@@ -15,43 +17,33 @@ import org.springframework.web.filter.CorsFilter;
 
 @SpringBootApplication
 @EnableFeignClients
+@EnableBinding(KafkaProcessorRental.class)
 public class Application {
 
     public static ApplicationContext applicationContext;
     public static void main(String[] args) {
         applicationContext = SpringApplication.run(Application.class, args);
 
-        ProductRepository productRepository = applicationContext.getBean(ProductRepository.class);
+        BookRepository bookRepository = applicationContext.getBean(BookRepository.class);
         // 초기 상품 셋팅
-        String[] products = {"TV", "MASK", "NOTEBOOK", "TABLE", "CLOCK"};
+        String[] books = {"TV", "MASK", "NOTEBOOK", "TABLE", "CLOCK"};
         int i = 1;
-        for(String p : products){
-            Product product = new Product();
+        for(String p : books){
+            Book book = new Book();
 
-            product.setImageUrl("https://github.githubassets.com/images/modules/profile/profile-joined-github.png");
-            product.setName(p);
-            product.setPrice(i*10000);
-            product.setStock(i*10);
-            product.setImageUrl("/goods/img/"+p+".jpg");
-
-            // 상품 디테일 추가 - 양방향 관계
-            ProductOption productOption = new ProductOption();
-            productOption.setName(p + "_detail");
-            productOption.setDescription(p + "_desc");
-            productOption.setProduct(product);
-
-            ProductOption productOption1 = new ProductOption();
-            productOption1.setName(p + "구매설명");
-            productOption1.setDescription(p + "설명입니다");
-            productOption1.setProduct(product);
-
-            product.addProductOptions(productOption);
-            product.addProductOptions(productOption1);
+            book.setName(p);
+            book.setPrice(i*10000);
+            book.setStock(i*10);
+            book.setImageUrl("/goods/img/"+p+".jpg");
 
             i++;
-            productRepository.save(product);
+            bookRepository.save(book);
         }
     }
+
+    /*public static KafkaProcessorRental getBeanForProcessor(){
+        return Application.applicationContext.getBean(KafkaProcessorRental.class);
+    }*/
 
     // spring-data-rest
     @Bean

@@ -1,8 +1,8 @@
-package com.example.template.rental;
+package com.example.template.product;
 
-import org.springframework.stereotype.Service;
-
-@Service
-public class RentalService {
-
+public interface ProductService {
+    void decreaseStock(Long productId, int quantity);
+    void increaseStock(Long productId, int quantity);
+    Product getProductById(Long id);
+    Product save(String data);
 }
