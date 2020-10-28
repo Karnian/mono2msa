@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 package com.example.template.rental;
 
 import com.example.template.delivery.Delivery;
+=======
+package com.example.template.delivery;
+
+>>>>>>> main
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

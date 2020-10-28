@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package com.example.template.book;
+=======
+package com.example.template.product;
+>>>>>>> main
 
 import com.example.template.Application;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class BookController {
 
     @Autowired
+<<<<<<< HEAD
     BookService bookService;
 
     @GetMapping("/book/{bookId}")
@@ -21,16 +26,37 @@ public class BookController {
     Book bookInsert(@RequestBody String data) {
         System.out.println(data);
         return this.bookService.save(data);
+=======
+    ProductService productService;
+
+    @GetMapping("/product/{productId}")
+    Product productStockCheck(@PathVariable(value = "productId") Long productId) {
+        return  this.productService.getProductById(productId);
+    }
+
+    @PostMapping("/product")
+    Product productInsert(@RequestBody String data) {
+        System.out.println(data);
+        return this.productService.save(data);
+>>>>>>> main
     }
 
     @Value("${superuser.userId}")
     String superUserId;
 
+<<<<<<< HEAD
     /*@Autowired
     Environment env;
     *//**
      * env 혹은 설정 값을 가져오는 테스트 코드
      *//*
+=======
+    @Autowired
+    Environment env;
+    /**
+     * env 혹은 설정 값을 가져오는 테스트 코드
+     */
+>>>>>>> main
     @GetMapping("/env")
     String getEnvSample() {
 
@@ -45,5 +71,9 @@ public class BookController {
         System.out.println(" @Value = " + superUserId);
 
         return superUserId;
+<<<<<<< HEAD
     }*/
+=======
+    }
+>>>>>>> main
 }

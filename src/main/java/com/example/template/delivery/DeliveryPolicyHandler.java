@@ -8,11 +8,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 @Service
-<<<<<<< HEAD
 public class BookPolicyHandler {
-=======
-public class PolicyHandler{
->>>>>>> main
 
     @Autowired
     BookService bookService;
